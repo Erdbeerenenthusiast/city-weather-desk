@@ -1,12 +1,21 @@
-async function getWeather() {
+async function getWeather(cityName) {
 
     const params = new URLSearchParams(window.location.search);
     const temperatureUnit = params.get("temperatureUnit");
 
-    const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=48.2085&longitude=16.3721&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&temperature_unit=${temperatureUnit}`);
+    const cityResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1&language=en&countryCode=AT`);
+    const cityData = await cityResponse.json();
+    const city = cityData.results[0];
+    console.log(cityData);
+
+    const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&temperature_unit=${temperatureUnit}`);
     const data = await response.json();
 
     const container = document.getElementById("weather-details");
+
+    const location = document.createElement("p");
+    location.textContent = `Location: ${city.name}, ${city.country}`;
+    container.appendChild(location);
 
     const date = document.createElement("p");
     date.textContent = `Date: ${data.daily.time[0]}`;
@@ -27,4 +36,4 @@ async function getWeather() {
     console.log(data);
 }
 
-getWeather();
+getWeather("Vienna");
