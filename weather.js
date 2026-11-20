@@ -10,15 +10,15 @@ async function getWeather() {
     container.appendChild(date);
 
     const maxTemp = document.createElement("p");
-    maxTemp.textContent = `Max: ${data.daily.temperature_2m_max[0]}`;
+    maxTemp.textContent = `Max: ${data.daily.temperature_2m_max[0]} ${data.daily_units.temperature_2m_max}`;
     container.appendChild(maxTemp);
 
     const minTemp = document.createElement("p");
-    minTemp.textContent = `Min: ${data.daily.temperature_2m_min[0]}`;
+    minTemp.textContent = `Min: ${data.daily.temperature_2m_min[0]} ${data.daily_units.temperature_2m_min}`;
     container.appendChild(minTemp);
 
     const precipitation = document.createElement("p");
-    precipitation.textContent = `Precipitation Probability: ${data.daily.precipitation_probability_max[0]}%`;
+    precipitation.textContent = `Precipitation Probability: ${data.daily.precipitation_probability_max[0]} ${data.daily_units.precipitation_probability_max}`;
     container.appendChild(precipitation);
 
     console.log(data);
