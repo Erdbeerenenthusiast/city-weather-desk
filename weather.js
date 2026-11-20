@@ -22,13 +22,20 @@ for (const cityName of cities) {
     cityListElement.appendChild(button);
 }
 
+const searchInput = document.getElementById("city-search");
+const searchButton = document.getElementById("city-search-button");
+
+searchButton.addEventListener("click", () => {
+    const cityName = searchInput.value;
+    getWeather(cityName);
+});
+
 getWeather(cities[0]);
 
 async function getWeather(cityName) {
     const container = document.getElementById("weather-details");
     container.innerHTML = "";
 
-    const params = new URLSearchParams(window.location.search);
     const temperatureUnit = params.get("temperatureUnit");
 
     const cityResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1&language=en&countryCode=AT`);

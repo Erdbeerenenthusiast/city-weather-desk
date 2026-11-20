@@ -2,3 +2,12 @@
 li{
     list-style-type: none;
 }
+
+.layout{
+    display: flex;
+    gap: 2rem;
+}
+#city-list{
+    display: flex;
+    flex-direction: column;
+}
