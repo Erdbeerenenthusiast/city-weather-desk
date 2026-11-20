@@ -1,4 +1,32 @@
+const citiesByRegion = {
+    VIE: ["Vienna"],
+    LAT: ["Amstetten", "Baden", "Krems an der Donau", "Mödling", "Sankt Pölten", "Tulln an der Donau", "Wiener Neustadt"],
+    UAT: ["Braunau am Inn", "Gmunden", "Linz", "Steyr", "Vöcklabruck", "Wels"],
+    BUR: ["Eisenstadt", "Güssing", "Mattersburg", "Neusiedl am See", "Oberwart"],
+    CAR: ["Feldkirchen in Kärnten", "Klagenfurt", "Spittal an der Drau", "Villach", "Wolfsberg"],
+    STY: ["Bruck an der Mur", "Graz", "Kapfenberg", "Leibnitz", "Leoben", "Weiz"],
+    TYR: ["Innsbruck", "Kitzbühel", "Kufstein", "Lienz", "Schwaz", "Wörgl"],
+    SAL: ["Bischofshofen", "Hallein", "Salzburg", "Zell am See"],
+    VOR: ["Bludenz", "Bregenz", "Dornbirn", "Feldkirch", "Hohenems", "Lustenau"]
+};
+
+const params = new URLSearchParams(window.location.search);
+const region = params.get("region");
+const cities = citiesByRegion[region];
+const cityListElement = document.getElementById("city-list");
+
+for (const cityName of cities) {
+    const button = document.createElement("button");
+    button.textContent = cityName;
+    button.addEventListener("click", () => getWeather(cityName));
+    cityListElement.appendChild(button);
+}
+
+getWeather(cities[0]);
+
 async function getWeather(cityName) {
+    const container = document.getElementById("weather-details");
+    container.innerHTML = "";
 
     const params = new URLSearchParams(window.location.search);
     const temperatureUnit = params.get("temperatureUnit");
@@ -10,8 +38,6 @@ async function getWeather(cityName) {
 
     const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&temperature_unit=${temperatureUnit}`);
     const data = await response.json();
-
-    const container = document.getElementById("weather-details");
 
     const location = document.createElement("p");
     location.textContent = `Location: ${city.name}, ${city.country}`;
@@ -35,5 +61,3 @@ async function getWeather(cityName) {
 
     console.log(data);
 }
-
-getWeather("Vienna");
