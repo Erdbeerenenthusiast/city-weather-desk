@@ -10,8 +10,21 @@ const citiesByRegion = {
     VOR: ["Bludenz", "Bregenz", "Dornbirn", "Feldkirch", "Hohenems", "Lustenau"]
 };
 
+const regionNames = {
+    VIE: "Vienna",
+    LAT: "Lower Austria",
+    UAT: "Upper Austria",
+    BUR: "Burgenland",
+    CAR: "Carinthia",
+    STY: "Styria",
+    TYR: "Tyrol",
+    SAL: "Salzburg",
+    VOR: "Vorarlberg"
+};
+
 const params = new URLSearchParams(window.location.search);
 const region = params.get("region");
+document.getElementById("region-title").textContent = regionNames[region];
 const cities = citiesByRegion[region];
 const cityListElement = document.getElementById("city-list");
 
@@ -33,6 +46,14 @@ searchButton.addEventListener("click", () => {
 getWeather(cities[0]);
 
 async function getWeather(cityName) {
+    for (const button of cityListElement.children) {
+        if (button.textContent === cityName) {
+            button.classList.add("selected");
+        } else {
+            button.classList.remove("selected");
+        }
+    }
+
     const container = document.getElementById("weather-details");
     container.innerHTML = "";
 

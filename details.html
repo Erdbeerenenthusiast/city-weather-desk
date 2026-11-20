@@ -6,17 +6,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<main class="page">
 
-    <input id="city-search" type="text" placeholder="Search a city">
-    <button id="city-search-button">Search</button>
+    <section class="region">
+        <h2 id="region-title"></h2>
+        <div class="layout">
+            <aside id="city-list"></aside>
+            <div id="weather-details"></div>
+        </div>
+    </section>
 
-    <main class = "layout">
+    <section class="search">
+        <label for="city-search">Search any place in Austria</label>
+        <input id="city-search" type="text" placeholder="e.g. Hallstatt">
+        <button id="city-search-button">Search</button>
+    </section>
 
-        <aside id="city-list"></aside>
-        <div id="weather-details"></div>
+</main>
 
-    </main>
-    <p> <a href="index.html">Back to Index</a></p>
-    <script src="weather.js"></script>
+<p><a href="index.html">Back to Index</a></p>
+
+<script src="weather.js"></script>
 </body>
 </html>
