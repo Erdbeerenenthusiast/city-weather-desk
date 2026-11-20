@@ -1,6 +1,9 @@
 async function getWeather() {
 
-    const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=48.2085&longitude=16.3721&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FBerlin&temperature_unit=fahrenheit');
+    const params = new URLSearchParams(window.location.search);
+    const temperatureUnit = params.get("temperatureUnit");
+
+    const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=48.2085&longitude=16.3721&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&temperature_unit=${temperatureUnit}`);
     const data = await response.json();
 
     const container = document.getElementById("weather-details");
