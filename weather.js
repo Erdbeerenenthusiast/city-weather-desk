@@ -57,15 +57,29 @@ async function getWeather(cityName) {
     const container = document.getElementById("weather-details");
     container.innerHTML = "";
 
+    if (cityName.trim() === "") {
+        container.textContent = "Please enter a place."; return;
+    }
+
+    container.textContent = "Loading…";
+
     const temperatureUnit = params.get("temperatureUnit");
 
     const cityResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1&language=en&countryCode=AT`);
     const cityData = await cityResponse.json();
+
+    if (!cityData.results) {
+        container.textContent = `No City found for "${cityName}"`;
+        return;
+    }
+
     const city = cityData.results[0];
     console.log(cityData);
 
     const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&temperature_unit=${temperatureUnit}`);
     const data = await response.json();
+
+    container.innerHTML = "";
 
     const location = document.createElement("p");
     location.textContent = `Location: ${city.name}, ${city.country}`;
