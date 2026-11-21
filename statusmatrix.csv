@@ -1,0 +1,11 @@
+Requirement-ID;Requirement;Status (umgesetzt/teilweise/nicht umgesetzt);Ort/Datei/URL;Test-ID;Kommentar
+GEN-01;Mindestens zwei sinnvoll verknüpfte HTML-Seiten;umgesetzt;index.html, details.html;T-03;Formular (GET) führt von index.html zu details.html, Link Back to Index führt zurück
+GEN-02;Externe gemeinsame CSS-Datei;umgesetzt;styles.css (in beiden Seiten per link eingebunden);T-03;Nachweis im Network-Tab
+GEN-03;Mindestens ein Nutzer-Event mit JavaScript-Logik;umgesetzt;weather.js (click-Listener auf Städte-Buttons und Search-Button);T-02;
+GEN-04;Mindestens ein externer API-Request mit fetch();umgesetzt;weather.js, Funktion getWeather();T-01, T-07;Zwei Requests: Open-Meteo Geocoding und Forecast
+GEN-05;JSON-Antwort wird verarbeitet und relevante Felder werden extrahiert;umgesetzt;weather.js, Funktion getWeather();T-01, T-10;Felder results[0].*, daily.*[0] und daily_units.*
+GEN-06;Daten werden als dynamische HTML-Elemente dargestellt;umgesetzt;weather.js (createElement/appendChild);T-01, T-02;Wetterwerte und Städte-Buttons werden dynamisch erzeugt
+GEN-07;Lade-/Leer-/Fehlerzustand wird verständlich behandelt;umgesetzt;weather.js;T-04, T-05, T-07, T-09;Laden, leere Eingabe, unbekannter Ort, API-Fehler, fehlende oder ungültige Region
+GEN-08;Öffentliches Git-Repository mit mindestens fünf sinnvollen Commits;umgesetzt;https://github.com/Erdbeerenenthusiast/city-weather-desk;-;Entwicklungsverlauf siehe README Abschnitt 9
+GEN-09;README.md mit Projekt-, API-, Testing- und Known-Issues-Dokumentation;umgesetzt;README.md;-;Enthält zusätzlich Bedienung, Struktur, KI-Nutzung und Deployment
+GEN-10;Finale Version auf eigener Legacy-Subdomain öffentlich erreichbar;teilweise;https://timon.it-tools.me, Ersatz: https://erdbeerenenthusiast.github.io/city-weather-desk/;T-01 (live);SFTP-Upload neuer Dateien schlägt serverseitig fehl, an Lektor gemeldet. Bis dahin über GitHub Pages erreichbar
