@@ -6,6 +6,7 @@ li {
     display: flex;
     gap: 3rem;
     align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 .layout {
