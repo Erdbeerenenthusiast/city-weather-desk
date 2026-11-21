@@ -76,6 +76,7 @@ city-weather-desk/
 ├── weather.js          Logik: URL-Parameter, Städteliste, API-Requests, Ausgabe, Fehlerbehandlung
 ├── testprotokoll.csv   Testprotokoll
 ├── statusmatrix.csv    Status der Requirements GEN-01 bis GEN-10
+├── docs/               Screenshots als Testevidenz
 └── README.md
 ```
 
@@ -86,9 +87,9 @@ Ablauf in `weather.js`: Region und Einheit werden aus der URL gelesen (`URLSearc
 Das vollständige Testprotokoll liegt unter `testprotokoll.csv`, die Zuordnung der Requirements zu Dateien und Tests unter `statusmatrix.csv`.
 
 Kurzstatus:
-- PASS: [Test-IDs eintragen]
-- FAIL: T-06 (bewusster Defekt, siehe Known Issues)
-- BLOCKED: [ggf. eintragen]
+- PASS: T-01, T-02, T-03, T-04, T-05, T-07, T-09, T-10, T-11
+- FAIL: T-06 (bewusster Defekt, siehe Known Issues), T-08 (fehlendes viewport-Meta-Tag, behoben und mit T-11 erneut getestet)
+- BLOCKED: keine
 
 ### Wichtigste getestete Risiken
 
@@ -104,7 +105,8 @@ Kurzstatus:
 - Die Städtelisten pro Bundesland sind fest im Code hinterlegt, da die API keine Orte nach Bundesland auflisten kann. Wien hat nur einen Eintrag.
 - Die Enter-Taste im Suchfeld startet keine Suche; die Suche läuft über den Search-Button (per Tab + Enter erreichbar).
 - Es wird nur der heutige Tag angezeigt, das Datum im ISO-Format (z. B. 2026-11-20).
-- Keine Optimierung für kleine Bildschirme (nicht Teil der LV).
+- Nur grundlegende Anpassung für kleine Bildschirme (viewport-Meta-Tag, Umbruch des Layouts), kein vollständig responsives Design.
+- Kein Favicon vorhanden: Der Browser meldet in der Console einen 404 für favicon.ico, ohne Auswirkung auf die Funktion.
 - Open-Meteo ist nur für nicht-kommerzielle Nutzung mit weniger als 10.000 Aufrufen pro Tag freigegeben.
 
 ## 9. Git / Entwicklungsverlauf
@@ -117,15 +119,14 @@ Kurzstatus:
 6. Städteliste pro Bundesland als klickbare Seitenleiste
 7. Suchfeld für beliebige Orte, Layout mit Seitenleiste und Bundesland-Überschrift, Hervorhebung der gewählten Stadt
 8. Lade-, Leer- und Fehlermeldungen (leere Eingabe, unbekannter Ort, API-Fehler, fehlende Region)
-9. README, Testprotokoll und Statusmatrix
+9. Viewport-Meta-Tag und Umbruch des Layouts für kleine Bildschirme (Fix nach Test T-08), Seitentitel korrigiert
+10. README, Testprotokoll und Statusmatrix
 
 Vollständige Historie: `git log --oneline`
 
 ## 10. AI Coding
 
-<!-- Bitte prüfen und in eigenen Worten anpassen – das ist deine Erklärung. -->
-
-Als KI-Werkzeug wurde Claude (Anthropic) verwendet, hauptsächlich als Tutor, da ich mich an ein paar Informationen der LV nicht mehr erinnern konnte:
+Als KI-Werkzeug wurde Claude (Anthropic) verwendet, hauptsächlich als Tutor, da ich mich an ein paar    Informationen der LV nicht mehr erinnern konnte:
 
 - Erklärung der Konzepte (`fetch`, `async`/`await`, JSON-Pfade, DOM-Manipulation, Events, `URLSearchParams`, `try`/`catch`) anhand von Beispielen mit anderen Daten
 - Code-Reviews nach jedem Schritt und Hilfe beim Lesen von Fehlermeldungen in der Konsole
@@ -138,6 +139,8 @@ Direkt von der KI übernommen:
 - HTML-Struktur und CSS-Layout der Detailseite
 - eine Bereinigung von `weather.js` (doppelte Schleife und falsche `ok`-Prüfung entfernt, Formatierung)
 - Entwürfe für README, Testprotokoll und Statusmatrix
+- Codevorgaben für die Prüfung auf fehlende Region und den Fix für kleine Bildschirme (viewport-Meta-Tag, flex-wrap)
+- Formulierung der Testprotokoll-Einträge auf Basis meiner eigenen Testdurchführung und Screenshots
 
 Ein Vorschlag der IDE-Autovervollständigung wurde verworfen, weil er die eigene Seite statt der API abgerufen hat.
 
@@ -148,4 +151,4 @@ Alle übernommenen Teile habe ich gelesen, nachvollzogen und getestet.
 - Vorgesehen: Upload per SFTP (FileZilla) in den Ordner `/home/www/web/student/timon` für https://timon.it-tools.me
 - Stand 21.11.2026: Das Überschreiben der vorhandenen `index.html` funktioniert, das Anlegen neuer Dateien (`details.html`, `styles.css`, `weather.js`) schlägt serverseitig fehl („open for write: received failure with description 'Failure'“). Laut Kolleg:innen betrifft das auch andere Ordner; das Problem wurde an den Lektor gemeldet.
 - Ersatzweise ist die Seite über GitHub Pages erreichbar: https://erdbeerenenthusiast.github.io/city-weather-desk/
-- Der Kernprozess (Auswahl → Detailseite → Stadtwechsel → Suche) wurde auf der GitHub-Pages-Version erneut getestet. [nach dem Test bestätigen]
+- Der Kernprozess (Auswahl → Detailseite → Stadtwechsel → Suche) wurde am 21.11.2026 auf der GitHub-Pages-Version vollständig getestet (siehe `testprotokoll.csv`).
